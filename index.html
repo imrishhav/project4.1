@@ -1,0 +1,106 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="curtain" id="curtain">
+      <h2 class="curtain-title">RIS​HU RISHAV</h2>
+      <p class="curtain-subtitle">The Best Designer Alive!</p>
+      <div class="curtain-icons">
+        <a href="https://facebook.com" target="_blank"
+          ><i class="fab fa-facebook"></i
+        ></a>
+        <a href="https://instagram.com" target="_blank"
+          ><i class="fab fa-instagram"></i
+        ></a>
+        <a href="https://twitter.com" target="_blank"
+          ><i class="fab fa-twitter"></i
+        ></a>
+      </div>
+    </div>
+
+    <div class="main" id="main">
+      <p class="main-tagline">RISHU RISHAV... BRAND'S STORY, AMPLIFIED.</p>
+      <h1 class="main-heading">
+        WE DON'T JUST MANAGE FEEDS, WE CRAFT OBSESSIONS.
+      </h1>
+      <button class="main-button">LET'S MAKE WAVES</button>
+
+      <div class="carousel">
+        <button class="carousel-arrow left" id="prevBtn">&#10094;</button>
+        <div class="cards">
+          <div class="card" style="background-image: url('images/3.png')"></div>
+          <div class="card" style="background-image: url('images/4.png')"></div>
+          <div
+            class="card active"
+            style="background-image: url('images/5.jpg')"
+          ></div>
+          <div class="card" style="background-image: url('images/6.png')"></div>
+          <div class="card" style="background-image: url('images/7.png')"></div>
+          <div class="card" style="background-image: url('images/8.png')"></div>
+          <div class="card" style="background-image: url('images/9.png')"></div>
+          <div
+            class="card"
+            style="background-image: url('images/10.png')"
+          ></div>
+          <div
+            class="card"
+            style="background-image: url('images/11.png')"
+          ></div>
+          <div
+            class="card"
+            style="background-image: url('images/12.png')"
+          ></div>
+        </div>
+        <button class="carousel-arrow right" id="nextBtn">&#10095;</button>
+      </div>
+    </div>
+
+    <script>
+      const curtain = document.getElementById("curtain");
+      curtain.addEventListener("click", () => {
+        curtain.classList.add("hidden");
+      });
+
+      const cardsContainer = document.querySelector(".cards");
+      const allCards = Array.from(document.querySelectorAll(".card"));
+      const prevBtn = document.getElementById("prevBtn");
+      const nextBtn = document.getElementById("nextBtn");
+
+      let start = 0;
+
+      function renderCards() {
+        allCards.forEach((card, index) => {
+          card.style.display = "none";
+          card.classList.remove("active");
+        });
+
+        const visible = allCards.slice(start, start + 3);
+        visible.forEach((card, i) => {
+          card.style.display = "block";
+          card.style.position = "absolute";
+          card.style.left = `${30 + i * 220}px`;
+          card.style.transform = i === 1 ? "scale(1.1)" : "scale(0.9)";
+          card.classList.toggle("active", i === 1);
+        });
+      }
+
+      prevBtn.addEventListener("click", () => {
+        start = (start - 1 + allCards.length) % allCards.length;
+        renderCards();
+      });
+
+      nextBtn.addEventListener("click", () => {
+        start = (start + 1) % allCards.length;
+        renderCards();
+      });
+
+      window.addEventListener("DOMContentLoaded", renderCards);
+    </script>
+  </body>
+</html>
